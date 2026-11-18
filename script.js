@@ -9,7 +9,7 @@ function updateDisplay() {
 }
 
 function appendNumber(number) {
-  if (displayValue === '0') {
+  if (displayValue === '0' || displayValue === 'Error') {
     displayValue = number.toString()
   } else {
     displayValue += number.toString()
@@ -41,6 +41,20 @@ function calculate() {
   firstOperand = null
   secondOperand = null
   currentOperator = null
+}
+
+function calculateSquareRoot() {
+  // Use the number currently shown on screen (after pressing an operator,
+  // displayValue is reset to '0' while the screen still shows the old number)
+  const display = document.getElementById('display')
+  const value = parseFloat(display.innerText)
+
+  if (isNaN(value) || value < 0) {
+    displayValue = 'Error'
+  } else {
+    displayValue = Math.sqrt(value).toString()
+  }
+  updateDisplay()
 }
 
 function clearDisplay() {
